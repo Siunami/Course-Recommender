@@ -192,62 +192,58 @@ preReq(213,221).
 
 courseName("Software Engineering Project").
 courseNumber(319).
-courseSection(101, 110).
-courseInstructor("Gregor Kiczales", 101, 110).
-courseDate(tt, 101, 110).
-courseTime(12:30, 14:00, 101, 110).
-building(dmp).
-building(cirs).
-room(cirs, 1250).
+courseSection(101, 319).
+courseInstructor("Jerry Jim", 101, 319).
+courseDate(tt, 101, 319).
+courseTime(12:30, 14:00, 101, 319).
+room(dmp, 110).
+preReq(310).
 
 courseName("Introduction to Human Computer Interaction Methods").
 courseNumber(344).
-courseSection(101, 110).
-courseInstructor("Gregor Kiczales", 101, 110).
-courseDate(tt, 101, 110).
-courseTime(12:30, 14:00, 101, 110).
-building(dmp).
-building(cirs).
-room(cirs, 1250).
+courseSection(101, 344).
+courseInstructor("Paul Bucci and Juliette Link", 101, 344).
+courseDate(w, 101, 344).
+courseTime(16:00, 19:00, 101, 344).
+room(dmp, 110).
+preReq(210).
 
-courseName("Advanced Software Engineering").
-courseNumber(410).
-courseSection(101, 110).
-courseInstructor("Gregor Kiczales", 101, 110).
-courseDate(tt, 101, 110).
-courseTime(12:30, 14:00, 101, 110).
-building(dmp).
-building(cirs).
-room(cirs, 1250).
+%courseName("Advanced Software Engineering").
+%courseNumber(410).
+%courseSection(101, 410).
+%courseInstructor("No Instructor", 101, 410).
+%courseDate(tt, 101, 110).
+%courseTime(12:30, 14:00, 101, 110).
+%building(dmp).
+%building(cirs).
+%room(cirs, 1250).
+%preReq(310).
 
 courseName("Introduction to Compiler Construction").
 courseNumber(411).
-courseSection(101, 110).
-courseInstructor("Gregor Kiczales", 101, 110).
-courseDate(tt, 101, 110).
-courseTime(12:30, 14:00, 101, 110).
-building(dmp).
-building(cirs).
-room(cirs, 1250).
+courseSection(101, 411).
+courseInstructor("Norman Hutchinson", 101, 411).
+courseDate(tt, 101, 411).
+courseTime(14:00, 15:30, 101, 411).
+room(dmp, 301).
+preReq(213,221,311).
 
 courseName("Distributed Systems").
 courseNumber(416).
-courseSection(101, 110).
-courseInstructor("Gregor Kiczales", 101, 110).
-courseDate(tt, 101, 110).
-courseTime(12:30, 14:00, 101, 110).
-building(dmp).
-building(cirs).
-room(cirs, 1250).
+courseSection(101, 416).
+courseInstructor("Ivan Beschastnikh", 101, 416).
+courseDate(mwf, 101, 416).
+courseTime(15:00, 16:00, 101, 416).
+room(dmp, 110).
+preReq(313,317)
 
 courseName("Advanced Methods for Human Computer Interaction").
 courseNumber(444).
-courseSection(101, 110).
-courseInstructor("Gregor Kiczales", 101, 110).
-courseDate(tt, 101, 110).
-courseTime(12:30, 14:00, 101, 110).
-building(dmp).
-building(cirs).
-room(cirs, 1250).
+courseSection(101, 444).
+courseInstructor("Joanna Mcgrenere", 101, 444).
+courseDate(t, 101, 444).
+courseTime(15:30, 17:30, 101, 444).
+room(dmp, 110).
+preReq(310,344).
 
 
