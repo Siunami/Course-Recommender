@@ -27,223 +27,239 @@ courseTimes()
 % DATABASE
 % ======================================================================
 
-% for each course:
-% Course Name, Course Number, Course Section, 
-% Course Time, Course Instructor, Course Date, Course Room/Building
+% course(number, section, name, instructor, date, time, building, room)
 
+% Core courses
+prop(110, course, 110).
+prop(110, name, "Computation, Programs and Programming").
+prop(110, section, 101).
+prop(110, instructor, "Gregor Kiczales").
+prop(110, day, tt).
+prop(110, startTime, 12:30).
+prop(110, endTime, 14:00).
+prop(110, building, cirs).
+prop(110, room, 1250).
+prop(110, prereq, none).
 
+prop(121, course, 121).
+prop(121, name, "Models of Computation").
+prop(121, section, 101).
+prop(121, instructor, "Georgios Tsikins").
+prop(121, day, tt).
+prop(121, startTime, 11:00).
+prop(121, endTime, 12:30).
+prop(121, building, dmp).
+prop(121, room, 110).
+prop(121, prereq, none).
 
-% core courses
-courseName("Computation, Programs and Programming").
-courseNumber(110).
-courseSection(101, 110).
-courseInstructor("Gregor Kiczales", 101, 110).
-courseDate(tt, 101, 110).
-courseTime(12:30, 14:00, 101, 110).
-building(dmp).
-building(cirs).
-room(cirs, 1250).
+prop(210, course, 210).
+prop(210, name, "Software Construction").
+prop(210, section, 101).
+prop(210, instructor, "Ryan Vogt").
+prop(210, day, mwf).
+prop(210, startTime, 12:00).
+prop(210, endTime, 13:00).
+prop(210, building, dmp).
+prop(210, room, 310).
+prop(210, prereq, 110).
 
-courseName("Models of Computation").
-courseNumber(121).
-courseSection(101, 121).
-courseInstructor("Georgios Tsikins", 101, 121).
-courseDate(tt, 101, 121).
-courseTime(11:00, 12:30, 101, 121).
-2building(dmp).
-room(dmp, 310).
-preReq(121).
+prop(213, course, 213).
+prop(213, name, "Introduction to Computer Systems").
+prop(213, section, 101).
+prop(213, instructor, "Anthony Estey").
+prop(213, day, tt).
+prop(213, startTime, 12:30).
+prop(213, endTime, 14:00).
+prop(213, building, dmp).
+prop(213, room, 110).
+prop(213, prereq, 121, 210).
 
-courseName("Software Construction").
-courseNumber(210).
-courseSection(101, 210).
-courseInstructor("Ryan Vogt", 101, 210).
-courseDate(mwf, 101, 210).
-courseTime(12:00, 13:00, 101, 210).
-building(dmp).
-room(dmp, 310).
-preReq(110).
+prop(221, course, 221).
+prop(221, name, "Basic Algorithms and Data Structures").
+prop(221, section, 101).
+prop(221, instructor, "Geoffrey Tien").
+prop(221, day, tt).
+prop(221, startTime, 14:00).
+prop(221, endTime, 15:30).
+prop(221, building, wmss).
+prop(221, room, 221).
+prop(221, prereq, 121, 210).
 
-courseName("Introduction to Computer Systems").
-courseNumber(213).
-courseSection(101, 213).
-courseInstructor("Anthony Estey", 101, 213).
-courseDate(tt, 101, 213).
-courseTime(12:30, 14:00, 101, 213).
-preReq(121,210).
+prop(310, course, 310).
+prop(310, name, "Introduction to Software Engineering").
+prop(310, section, 101).
+prop(310, instructor, "Elisa Baniassad").
+prop(310, day, tt).
+prop(310, startTime, 12:30).
+prop(310, endTime, 14:00).
+prop(310, building, dmp).
+prop(310, room, 310).
+prop(310, prereq, 210).
 
-courseName("Basic Algorithms and Data Structures").
-courseNumber(221).
-courseSection(101, 221).
-courseInstructor("Geoffrey Tien", 101, 221).
-courseDate(tt, 101, 221).
-courseTime(14:00, 15:30, 101, 221).
-building(wmss).
-room(wmss, 221).
-preReq(121,210).
+prop(313, course, 313).
+prop(313, name, "Computer Hardware and Operating Systems").
+prop(313, section, 101).
+prop(313, instructor, "Donald Acton").
+prop(313, day, tt).
+prop(313, startTime, 11:00).
+prop(313, endTime, 12:00).
+prop(313, building, dmp).
+prop(313, room, 310).
+prop(313, prereq, 213, 221).
 
-courseName("Introduction to Software Engineering").
-courseNumber(310).
-courseSection(101, 310).
-courseInstructor("Elisa Baniassad", 101, 310).
-courseDate(tt, 101, 310).
-courseTime(12:30, 14:00, 101, 310).
-room(dmp, 310).
-preReq(210).
+prop(320, course, 320).
+prop(320, name, "Intermediate Algorithm Design and Analysis").
+prop(320, section, 101).
+prop(320, instructor, "Cinda Heeren").
+prop(320, day, mwf).
+prop(320, startTime, 14:00).
+prop(320, endTime, 15:00).
+prop(320, building, dmp).
+prop(320, room, 110).
+prop(320, prereq, 221).
 
-courseName("Computer Hardware and Operating Systems").
-courseNumber(313).
-courseSection(101, 313).
-courseInstructor("Donald Acton", 101, 313).
-courseDate(mwf, 101, 313).
-courseTime(11:00, 12:00, 101, 313).
-room(dmp, 310).
-preReq(213,221).
+% AI courses
+prop(302, course, 302).
+prop(302, name, "Numerical Computation for Algebraic Problems").
+prop(302, section, 101).
+prop(302, instructor, "Jessica Bosch").
+prop(302, day, mwf).
+prop(302, startTime, 13:00).
+prop(302, endTime, 14:00).
+prop(302, building, dmp).
+prop(302, room, 301).
+prop(302, prereq, 110).
 
-courseName("Intermediate Algorithm Design and Analysis").
-courseNumber(320).
-courseSection(101, 320).
-courseInstructor("Cinda Heeren", 101, 320).
-courseDate(mwf, 101, 320).
-courseTime(14:00, 15:00, 101, 320).
-room(dmp, 110).
-preReq(221).
+% Included in SE as well
+prop(304, course, 304).
+prop(304, name, "Introduction to Relational Databases").
+prop(304, section, 101).
+prop(304, instructor, "Edwin Max Knorr").
+prop(304, day, tt).
+prop(304, startTime, 9:30).
+prop(304, endTime, 11:00).
+prop(304, building, fsc).
+prop(304, room, 1005).
+prop(304, prereq, 221, 210).
 
-% ai courses
-courseName("Numerical Computation for Algebraic Problems").
-courseNumber(302).
-courseSection(101, 302).
-courseInstructor("Jessica Bosch", 101, 302).
-courseDate(mwf, 101, 302).
-courseTime(13:00, 14:00, 101, 302).
-room(dmp, 301).
-preReq(110).
+prop(312, course, 312).
+prop(312, name, "Functional and Logic Programming").
+prop(312, section, 101).
+prop(312, instructor, "David Pool").
+prop(312, day, mwf).
+prop(312, startTime, 12:00).
+prop(312, endTime, 13:00).
+prop(312, building, dmp).
+prop(312, room, 110).
+prop(312, prereq, 210).
 
-% also software engineering
-courseName("Introduction to Relational Databases").
-courseNumber(304).
-courseSection(101, 304).
-courseInstructor("Edwin Max Knorr", 101, 304).
-courseDate(tt, 101, 304).
-courseTime(9:30, 11:00, 101, 304).
-building(fsc).
-room(fsc, 1005).
-preReq(221, 210).
+prop(322, course, 322).
+prop(322, name, "Introduction to Artificial Intelligence").
+prop(322, section, 101).
+prop(322, instructor, "Cristina Conati").
+prop(322, day, tt).
+prop(322, startTime, 17:00).
+prop(322, endTime, 18:30).
+prop(322, building, mm).
+prop(322, room, 166).
+prop(322, prereq, 221,210).
 
-courseName("Functional and Logic Programming").
-courseNumber(312).
-courseSection(101, 312).
-courseInstructor("David Pool", 101, 312).
-courseDate(mwf, 101, 312).
-courseTime(12:00, 12:00, 101, 312).
-room(dmp, 110).
-preReq(210).
+prop(340, course, 340).
+prop(340, name, "Machine Learning and Data Mining").
+prop(340, section, 101).
+prop(340, instructor, "Mark Schmidth").
+prop(340, day, mwf).
+prop(340, startTime, 16:00).
+prop(340, endTime, 17:00).
+prop(340, building, fsc).
+prop(340, room, 1005).
+prop(340, prereq, 221,210).
 
-courseName("Introduction to Artificial Intelligence").
-courseNumber(322).
-courseSection(101, 322).
-courseInstructor("Cristina Conati", 101, 322).
-courseDate(tt, 101, 322).
-courseTime(17:00, 18:30, 101, 322).
-building(mm).
-room(mm, 166).
-preReq(221,210).
+prop(422, course, 422).
+prop(422, name, "Intelligent Systems").
+prop(422, section, 101).
+prop(422, instructor, "Giuseppe Carenini").
+prop(422, day, mwf).
+prop(422, startTime, 12:00).
+prop(422, endTime, 14:00).
+prop(422, building, ml).
+prop(422, room, 202).
+prop(422, prereq, 322).
 
-courseName("Machine Learning and Data Mining").
-courseNumber(340).
-courseSection(101, 340).
-courseInstructor("Mark Schmidth", 101, 340).
-courseDate(mwf, 101, 340).
-courseTime(16:00, 17:00, 101, 340).
-building(fsc).
-room(fsc, 1005).
-preReq(221,210).
+% SE courses
+prop(311, course, 311).
+prop(311, name, "Definition of Programming Languages").
+prop(311, section, 101).
+prop(311, instructor, "Steven Wolfman").
+prop(311, day, mwf).
+prop(311, startTime, 10:00).
+prop(311, endTime, 11:00).
+prop(311, building, dmp).
+prop(311, room, 310).
+prop(311, prereq, 210).
 
-courseName("Intelligent Systems").
-courseNumber(422).
-courseSection(101, 422).
-courseInstructor("Giuseppe Carenini", 101, 422).
-courseDate(mwf, 101, 422).
-courseTime(12:00, 14:00, 101, 422).
-building(ml).
-room(ml, 202).
-preReq(322).
+prop(317, course, 317).
+prop(317, name, "Internet Computing").
+prop(317, section, 101).
+prop(317, instructor, "Jonathan Schroeder").
+prop(317, day, mwf).
+prop(317, startTime, 11:00).
+prop(317, endTime, 12:00).
+prop(317, building, dmp).
+prop(317, room, 110).
+prop(317, prereq, 213,221).
 
+prop(319, course, 319).
+prop(319, name, "Software Engineering Project").
+prop(319, section, 101).
+prop(319, instructor, "Jerry Jim").
+prop(319, day, tt).
+prop(319, startTime, 12:30).
+prop(319, endTime, 14:00).
+prop(319, building, dmp).
+prop(319, room, 110).
+prop(319, prereq, 310).
 
-% software engineering
+prop(344, course, 344).
+prop(344, name, "Introduction to Human Computer Interaction Methods").
+prop(344, section, 101).
+prop(344, instructor, "Paul Bucci and Juliette Link").
+prop(344, day, w).
+prop(344, startTime, 16:00).
+prop(344, endTime, 19:00).
+prop(344, building, dmp).
+prop(344, room, 110).
+prop(344, prereq, 210).
 
-courseName("Definition of Programming Languages").
-courseNumber(311).
-courseSection(101, 311).
-courseInstructor("Steven Wolfman", 101, 311).
-courseDate(mwf, 101, 311).
-courseTime(10:00, 11:00, 101, 311).
-room(dmp, 310).
-preReq(210).
+prop(411, course, 411).
+prop(411, name, "Introduction to Compiler Construction").
+prop(411, section, 101).
+prop(411, instructor, "Norman Hutchinson").
+prop(411, day, tt).
+prop(411, startTime, 14:00).
+prop(411, endTime, 15:30).
+prop(411, building, dmp).
+prop(411, room, 301).
+prop(411, prereq, 213,221,311).
 
-courseName("Internet Computing").
-courseNumber(317).
-courseSection(101, 317).
-courseInstructor("Jonathan Schroeder", 101, 317).
-courseDate(mwf, 101, 317).
-courseTime(11:00, 12:00, 101, 317).
-room(dmp, 110).
-preReq(213,221).
+prop(416, course, 416).
+prop(416, name, "Distributed Systems").
+prop(416, section, 101).
+prop(416, instructor, "Ivan Beschastnikh").
+prop(416, day, mwf).
+prop(416, startTime, 15:00).
+prop(416, endTime, 16:00).
+prop(416, building, dmp).
+prop(416, room, 110).
+prop(416, prereq, 313,317).
 
-courseName("Software Engineering Project").
-courseNumber(319).
-courseSection(101, 319).
-courseInstructor("Jerry Jim", 101, 319).
-courseDate(tt, 101, 319).
-courseTime(12:30, 14:00, 101, 319).
-room(dmp, 110).
-preReq(310).
-
-courseName("Introduction to Human Computer Interaction Methods").
-courseNumber(344).
-courseSection(101, 344).
-courseInstructor("Paul Bucci and Juliette Link", 101, 344).
-courseDate(w, 101, 344).
-courseTime(16:00, 19:00, 101, 344).
-room(dmp, 110).
-preReq(210).
-
-%courseName("Advanced Software Engineering").
-%courseNumber(410).
-%courseSection(101, 410).
-%courseInstructor("No Instructor", 101, 410).
-%courseDate(tt, 101, 110).
-%courseTime(12:30, 14:00, 101, 110).
-%building(dmp).
-%building(cirs).
-%room(cirs, 1250).
-%preReq(310).
-
-courseName("Introduction to Compiler Construction").
-courseNumber(411).
-courseSection(101, 411).
-courseInstructor("Norman Hutchinson", 101, 411).
-courseDate(tt, 101, 411).
-courseTime(14:00, 15:30, 101, 411).
-room(dmp, 301).
-preReq(213,221,311).
-
-courseName("Distributed Systems").
-courseNumber(416).
-courseSection(101, 416).
-courseInstructor("Ivan Beschastnikh", 101, 416).
-courseDate(mwf, 101, 416).
-courseTime(15:00, 16:00, 101, 416).
-room(dmp, 110).
-preReq(313,317)
-
-courseName("Advanced Methods for Human Computer Interaction").
-courseNumber(444).
-courseSection(101, 444).
-courseInstructor("Joanna Mcgrenere", 101, 444).
-courseDate(t, 101, 444).
-courseTime(15:30, 17:30, 101, 444).
-room(dmp, 110).
-preReq(310,344).
-
-
+prop(444, course, 444).
+prop(444, name, "Advanced Methods for Human Computer Interaction").
+prop(444, section, 101).
+prop(444, instructor, "Joanna Mcgrenere").
+prop(444, day, t).
+prop(444, startTime, 15:30).
+prop(444, endTime, 17:30).
+prop(444, building, dmp).
+prop(444, room, 110).
+prop(444, prereq, 310,344).
