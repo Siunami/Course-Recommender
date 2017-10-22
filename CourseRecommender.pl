@@ -1,10 +1,17 @@
-% Base Project: 
+% Base Project:
 % Database of courses
-% Recommendation based on interests/questions
-% Where course takes place, time, instructor, etc.
+% Recommendation based on interests/questions (1)
+% What courses are prerequisites of X course? (2)
+% Who teaches X course? (3)
+% What courses are about Y topic? (4)
+% What day is X course offered? (5)
+% possibly: What time is X course, Z section? (6)
 % NLP querying interface
 
 % Extension Ideas:
+% Student profile who has taken some courses already
+% Additional questions:
+% What is the difficulty of X course?
 % autocorrect
 % create possible timetables
 
@@ -12,16 +19,51 @@
 % NATURAL LANGUAGE PROCESSING
 % ======================================================================
 
+% Break query into its parts of speech a
+% create keywords for different questions a user can ask
+% ex: teaches implies Q3, day implies Q5
+% parse out
 
+animal(cat).
+
+ask(X) :-
+  write('Hi my name is Mazi.'),
+	write('\nI am a personal assistant bot.'),
+	write('\nAsk me questions about CPSC courses at UBC.'),
+	nl,
+  read(X).
+	%query(X, Y).
+
+query(X, Y) :-
+	Y.
 
 % ======================================================================
 % QUESTION TYPES
 % ======================================================================
 
-isInstructor(X, Y) :-
-	courseInstructor(X, _, Y).
 
-courseTimes()
+% Q(3)
+% X is instructor name as string
+% Y is course as a XXX
+isInstructor(X, Y) :-
+	prop(Y,instructor,X),
+	prop(Y,course, Y).
+
+% Q(6)
+% get all course times for a course
+% create functions to narrow to semester
+% X is course number XXX
+% Z is new variable for all startTimes, ex: B
+% P is new variable for all endTimes, ex: C
+getCourseTimes(X, Z, P) :-
+	findall(S1,prop(X, startTime, S1), Z),
+	findall(S2,prop(X, endTime, S2), P).
+
+% Q(5)
+% X is course number as XXX
+% Y is a new variable of days course is offered
+dayCourseOffered(X, Y) :-
+	findall(D, prop(X, day, D), Y).
 
 % ======================================================================
 % DATABASE
