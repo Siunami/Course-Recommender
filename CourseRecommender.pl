@@ -24,18 +24,28 @@
 % ex: teaches implies Q3, day implies Q5
 % parse out
 
-animal(cat).
-
-ask(X) :-
+ask(Input1, Input2, Y, G) :-
   write('Hi my name is Mazi.'),
 	write('\nI am a personal assistant bot.'),
-	write('\nAsk me questions about CPSC courses at UBC.'),
+	write('\nSelect a question number'),
+  write('\n1. Who teaches a course?'),
 	nl,
-  read(X).
-	%query(X, Y).
+  read(Input1),
+	query(Input1, Input2, Y, G).
 
-query(X, Y) :-
-	Y.
+query(Input1, Input2, Y, G) :-
+	Input1 = 1,
+  write('What professor?'),
+  nl,
+  read(Input2),
+  query2(Input1,Input2,Y,G).
+
+query2(Input1 , Input2,Y ,G) :-
+  Input1 = 1,
+  write('What class?'),
+  nl,
+  read(Input3),
+  isInstructor(Input2, Input3).
 
 % ======================================================================
 % QUESTION TYPES
@@ -50,7 +60,7 @@ query(X, Y) :-
 % X is course wanting to take
 % Y is preReq course
 getPreReq(X, Y) :-
-	prop(X, prereq, Y). 
+	prop(X, prereq, Y).
 
 % Q(3)
 % X is instructor name as string
