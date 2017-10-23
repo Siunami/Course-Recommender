@@ -16,7 +16,21 @@
 % create possible timetables
 
 % ======================================================================
-% NATURAL LANGUAGE PROCESSING
+% User Accounts
+% ======================================================================
+
+prop("Matt", "Pass", [110, 121, 210]).
+
+
+login(User, Pass) :-
+  prop(User, Pass, X),
+  write("You have taken these courses: "),
+  write(X).
+
+
+
+% ======================================================================
+% Query Processing
 % ======================================================================
 
 % Break query into its parts of speech a
@@ -24,33 +38,48 @@
 % ex: teaches implies Q3, day implies Q5
 % parse out
 
-ask(Input1, Input2, Y, G) :-
+ask() :-
   write('Hi my name is Mazi.'),
 	write('\nI am a personal assistant bot.'),
 	write('\nSelect a question number'),
   write('\n1. Who teaches a course?'),
+  write('\n2. What day is a course offered'),
+  write('\n3. What are the prerequisites of a course?'),
+  write('\n4. Schedule my courses'),
 	nl,
-  read(Input1),
-	query(Input1, Input2, Y, G).
+  read(Input),
+	query(Input).
 
-query(Input1, Input2, Y, G) :-
-	Input1 = 1,
-  write('What professor?'),
-  nl,
-  read(Input2),
-  query2(Input1,Input2,Y,G).
-
-query2(Input1 , Input2,Y ,G) :-
-  Input1 = 1,
+% Question 1
+query(Input) :-
+  Input = 1,
   write('What class?'),
   nl,
-  read(Input3),
-  isInstructor(Input2, Input3).
+  read(Class),
+  isInstructor(Class).
+
+
+% Question 4 -> requires User Login
+query(Input) :-
+  Input = 4,
+  write('Login'),
+  write('\nUsername: '),
+  nl,
+  read(User),
+  authenticate(User).
+
+authenticate(User) :-
+  write('\nPassword: '),
+  nl,
+  read(Pass),
+  login(User,Pass).
+
 
 
 % ======================================================================
 % QUESTION TYPES
 % ======================================================================
+<<<<<<< HEAD
 				% List of questions
 				% which instructor teaches X course
 				% which Y course is a prereq of X course
@@ -77,6 +106,14 @@ getBuilding(X, Y) :-
 	prop(Y, building, X),
 	prop(Y, course, Y).
 
+=======
+% List of questions
+% which instructor teaches X course
+% which Y course is a prereq of X course
+% which X courses are AI courses
+% which X courses are SE courses
+% which X courses are taught by Y instructor
+>>>>>>> ebcb33e1dad7e701479b449a08b241e77391383c
 % Q(2)
 % X is course wanting to take
 % Y is preReq course
@@ -86,9 +123,8 @@ getPreReq(X, Z, Y) :-
 % Q(3)
 % X is instructor name as string
 % Y is course as a XXX
-isInstructor(X, Y) :-
-	prop(Y,instructor,X),
-	prop(Y,course, Y).
+isInstructor(X,Y) :-
+	prop(X,instructor,Y).
 
 % Q(6)
 % get all course times for a course
@@ -166,7 +202,8 @@ prop(221, startTime, 14:00).
 prop(221, endTime, 15:30).
 prop(221, building, wmss).
 prop(221, room, 221).
-prop(221, prereq, 121, 210).
+prop(221, prereq, 121).
+prop(221, prereq, 210).
 
 prop(310, course, 310).
 prop(310, name, "Introduction to Software Engineering").
@@ -188,7 +225,8 @@ prop(313, startTime, 11:00).
 prop(313, endTime, 12:00).
 prop(313, building, dmp).
 prop(313, room, 310).
-prop(313, prereq, 213, 221).
+prop(313, prereq, 213).
+prop(313, prereq, 221).
 
 prop(320, course, 320).
 prop(320, name, "Intermediate Algorithm Design and Analysis").
@@ -223,7 +261,8 @@ prop(304, startTime, 9:30).
 prop(304, endTime, 11:00).
 prop(304, building, fsc).
 prop(304, room, 1005).
-prop(304, prereq, 221, 210).
+prop(304, prereq, 221).
+prop(304, prereq, 210).
 
 prop(312, course, 312).
 prop(312, name, "Functional and Logic Programming").
@@ -245,7 +284,8 @@ prop(322, startTime, 17:00).
 prop(322, endTime, 18:30).
 prop(322, building, mm).
 prop(322, room, 166).
-prop(322, prereq, 221,210).
+prop(322, prereq, 221).
+prop(322, prereq, 210).
 
 prop(340, course, 340).
 prop(340, name, "Machine Learning and Data Mining").
@@ -256,7 +296,8 @@ prop(340, startTime, 16:00).
 prop(340, endTime, 17:00).
 prop(340, building, fsc).
 prop(340, room, 1005).
-prop(340, prereq, 221,210).
+prop(340, prereq, 221).
+prop(340, prereq, 210).
 
 prop(422, course, 422).
 prop(422, name, "Intelligent Systems").
@@ -290,7 +331,8 @@ prop(317, startTime, 11:00).
 prop(317, endTime, 12:00).
 prop(317, building, dmp).
 prop(317, room, 110).
-prop(317, prereq, 213,221).
+prop(317, prereq, 213).
+prop(317, prereq, 221).
 
 prop(319, course, 319).
 prop(319, name, "Software Engineering Project").
@@ -323,7 +365,9 @@ prop(411, startTime, 14:00).
 prop(411, endTime, 15:30).
 prop(411, building, dmp).
 prop(411, room, 301).
-prop(411, prereq, 213,221,311).
+prop(411, prereq, 213).
+prop(411, prereq, 221).
+prop(411, prereq, 311).
 
 prop(416, course, 416).
 prop(416, name, "Distributed Systems").
@@ -334,7 +378,8 @@ prop(416, startTime, 15:00).
 prop(416, endTime, 16:00).
 prop(416, building, dmp).
 prop(416, room, 110).
-prop(416, prereq, 313,317).
+prop(416, prereq, 313).
+prop(416, prereq, 317).
 
 prop(444, course, 444).
 prop(444, name, "Advanced Methods for Human Computer Interaction").
@@ -345,4 +390,5 @@ prop(444, startTime, 15:30).
 prop(444, endTime, 17:30).
 prop(444, building, dmp).
 prop(444, room, 110).
-prop(444, prereq, 310,344).
+prop(444, prereq, 310).
+prop(444, prereq, 344).
