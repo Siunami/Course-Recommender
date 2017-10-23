@@ -79,7 +79,6 @@ authenticate(User) :-
 % ======================================================================
 % QUESTION TYPES
 % ======================================================================
-<<<<<<< HEAD
 				% List of questions
 				% which instructor teaches X course
 				% which Y course is a prereq of X course
@@ -106,14 +105,6 @@ getBuilding(X, Y) :-
 	prop(Y, building, X),
 	prop(Y, course, Y).
 
-=======
-% List of questions
-% which instructor teaches X course
-% which Y course is a prereq of X course
-% which X courses are AI courses
-% which X courses are SE courses
-% which X courses are taught by Y instructor
->>>>>>> ebcb33e1dad7e701479b449a08b241e77391383c
 % Q(2)
 % X is course wanting to take
 % Y is preReq course
@@ -146,7 +137,24 @@ dayCourseOffered(X, Y) :-
 % DATABASE
 % ======================================================================
 
-% course(number, section, name, instructor, date, time, building, room)
+				% course(number, section, name, instructor, date, time, building, room)
+
+prop(AI, course, 302).
+prop(AI, course, 304).
+prop(AI, course, 312).
+prop(AI, course, 322).
+prop(AI, course, 340).
+prop(AI, course, 422).
+
+prop(SE, course, 304).
+prop(SE, course, 311).
+prop(SE, course, 317).
+prop(SE, course, 319).
+prop(SE, course, 344).
+prop(SE, course, 411).
+prop(SE, course, 416).
+prop(SE, course, 444).
+%added
 
 % Core courses
 prop(110, course, 110).
