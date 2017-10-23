@@ -47,6 +47,7 @@ query2(Input1 , Input2,Y ,G) :-
   read(Input3),
   isInstructor(Input2, Input3).
 
+
 % ======================================================================
 % QUESTION TYPES
 % ======================================================================
@@ -56,6 +57,26 @@ query2(Input1 , Input2,Y ,G) :-
 				% which X courses are AI courses
 				% which X courses are SE courses
 				% which X courses are taught by Y instructor
+				% which days is X course offered
+				% which building is X course in
+% X is section of course
+% Y is course
+getSection(X,Y) :-
+	prop(Y, section, X),
+	prop(Y, course, Y).
+
+% X is room course is in
+% Y is course
+getRoom(X,Y) :-
+	prop(Y, room, X),
+	prop(Y, course, Y).
+
+% X is building course is in
+% Y is course
+getBuilding(X, Y) :-
+	prop(Y, building, X),
+	prop(Y, course, Y).
+
 % Q(2)
 % X is course wanting to take
 % Y is preReq course
