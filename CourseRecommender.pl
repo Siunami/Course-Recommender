@@ -49,8 +49,8 @@ query(X, Y) :-
 % Q(2)
 % X is course wanting to take
 % Y is preReq course
-getPreReq(X, Y) :-
-	prop(X, prereq, Y). 
+getPreReq(X, Z, Y) :-
+	findall(S1, prop(X, prereq, Y), Z). 
 
 % Q(3)
 % X is instructor name as string
