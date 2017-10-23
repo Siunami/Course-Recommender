@@ -40,7 +40,17 @@ query(X, Y) :-
 % ======================================================================
 % QUESTION TYPES
 % ======================================================================
-
+				% List of questions
+				% which instructor teaches X course
+				% which Y course is a prereq of X course
+				% which X courses are AI courses
+				% which X courses are SE courses
+				% which X courses are taught by Y instructor
+% Q(2)
+% X is course wanting to take
+% Y is preReq course
+getPreReq(X, Y) :-
+	prop(X, prereq, Y). 
 
 % Q(3)
 % X is instructor name as string
