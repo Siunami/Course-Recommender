@@ -113,7 +113,7 @@ findCourse(Interest, L) :-
   Interest = 2,
   write('Looking for courses related to '),
   write('Artificial Intelligence.'),
-  write('\nYou have currently taken '),
+  write('\nYou have already taken '),
   listAllCourses(L),
   write('\nPlease wait...'),
   scheduleTimetable(ai, L).
@@ -145,16 +145,37 @@ notcommon(L1, L2, Result) :-
   subtract(L1, ["false"], Z),
   subtract(Z, Intersec, Result).
 
-fulfilledPrereqs([],L2, X).
-fulfilledPrereqs([H|L1],L2, X) :-
+list_empty([], true).
+list_empty([_|_], false).
+
+checkRemove(true,[H|X], [H|X]).
+checkRemove(false,[H|X], X).
+
+
+fulfilledPrereqs([],L2, X, X).
+fulfilledPrereqs([H|L1],L2, [T|X], P) :-
   findall(S1, prop(H, prereq, S1), G),
   subtract(G, ["false"], K),
+  write("\nCourse\n"),
+  write(H),
   write("\n"),
   write(K),
   subtract(K,L2,J),
   write("\n"),
   write(J),
-  fulfilledPrereqs(L1, L2,[H|X]).
+  list_empty(J,Ans),
+  checkRemove(Ans, [T|X], U),
+  fulfilledPrereqs(L1, L2,U,P).
+
+schedule([], Times, Classes, Times, Classes).
+schedule([H|P], Times, Classes, I, O) :-
+  prop(H, startTime, V),
+  prop(H, day, D),
+  schedule(P, [[V]|Times], [H|Classes], I, O).
+
+
+
+
 
 % Checks what courses in stream have been taken already
 % Takes remaining courses and checks if prerequisites are satisfied
@@ -164,9 +185,11 @@ scheduleTimetable(Stream, L) :-
 %  hasTaken(Z,L, NotFulfilledCourses),
 %  sub(Z,L,NotFulfilledCourses),
   notcommon(Z,L,NotFulfilledCourses),
-  fulfilledPrereqs(NotFulfilledCourses,L, X),
+  fulfilledPrereqs(NotFulfilledCourses,L, NotFulfilledCourses, P),
+  schedule(P,[],[], I, O),
   write("\nSuggested courses:\n"),
-  write(X).
+  write(I),
+  write(O).
 
 
 
