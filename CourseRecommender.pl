@@ -20,11 +20,12 @@
 % ======================================================================
 
 prop("Matt", "Pass", [110, 121, 210]).
+prop("Mat", "Pass", [110, 121, 210,221, 304]).
 prop(_,_, "false").
 
 
-login(User, Pass, X) :-
-  prop(User, Pass, X).
+login(User, Pass, L) :-
+  prop(User, Pass, L).
 
 
 
@@ -72,16 +73,16 @@ authenticate(User) :-
   write('\nPassword: '),
   nl,
   read(Pass),
-  login(User,Pass, X),
-  selectInterest(User,Pass,X).
+  login(User,Pass, L),
+  selectInterest(User,Pass,L).
 
-selectInterest(User,Pass,X) :-
-  X = "false",
-  write("Sorry that is an incorrect username and password combo."),
+selectInterest(User,Pass,L) :-
+  L = "false",
+  write("Sorry that is an incorrect username and password combo.\n"),
   query(4).
 
-selectInterest(User,Pass,X) :-
-  not(X = "false"),
+selectInterest(User,Pass,L) :-
+  not(L = "false"),
   write("Hi "),
   write(User),
   write("."),
@@ -90,7 +91,7 @@ selectInterest(User,Pass,X) :-
   write('\n2. Artificial Intelligence'),
   nl,
   read(Interest),
-  findCourse(Interest, X).
+  findCourse(Interest, L).
 
 listAllCourses([]).
 listAllCourses([Y|H]) :-
@@ -99,29 +100,72 @@ listAllCourses([Y|H]) :-
   write(Y),
   listAllCourses(H).
 
-findCourse(Interest, X) :-
+findCourse(Interest, L) :-
   Interest = 1,
   write('Looking for courses related to '),
   write('Software Engineering.'),
   write('\nYou have currently taken '),
-  listAllCourses(X),
+  listAllCourses(L),
   write('\nPlease wait...'),
-  scheduleTimetable(se, X).
+  scheduleTimetable(se, L).
 
-findCourse(Interest, X) :-
+findCourse(Interest, L) :-
   Interest = 2,
   write('Looking for courses related to '),
   write('Artificial Intelligence.'),
   write('\nYou have currently taken '),
-  listAllCourses(X),
+  listAllCourses(L),
   write('\nPlease wait...'),
-  scheduleTimetable(ai, X).
+  scheduleTimetable(ai, L).
 
-scheduleTimetable(Stream, X) :-
+%compareAllCourses(Course, [ACourse|Taken], Check) :-
+%  Course = ACourse,
+%  compareAllCourses(Course, Taken, "true").
+%compareAllCourses(Course, [ACourse|Taken], Check) :-
+%  not(Course = ACourse),
+%  compareAllCourses(Course, Taken, Check).
+
+%hasTaken([], Taken, Suggested).
+%hasTaken([Course|CourseList], Taken, Suggested) :-
+  %compareAllCourses(Course, Taken, Check),
+%  member(Course, Taken),
+%  write("taken"),
+%  hasTaken(CourseList,Taken,Suggested)).
+%hasTaken([Course|CourseList], Taken, Suggested) :-
+%  %compareAllCourses(Course, Taken, Check),
+%  not(member(Course, Taken)),
+%  write("not taken"),
+%  hasTaken(CourseList,Taken,Suggested)).
+
+sub(List,[],List).
+sub(List,[X|Sub],Rem) :- select(X,List,Rem0), sub(Rem0,Sub,Rem).
+
+notcommon(L1, L2, Result) :-
+  intersection(L1, L2, Intersec),
+  subtract(L1, ["false"], Z),
+  subtract(Z, Intersec, Result).
+
+fulfilledPrereqs([],L2, X).
+fulfilledPrereqs([H|L1],L2, X) :-
+  findall(S1, prop(H, prereq, S1), G),
+  subtract(G, ["false"], K),
+  write("\n"),
+  write(K),
+  subtract(K,L2,J),
+  write("\n"),
+  write(J),
+  fulfilledPrereqs(L1, L2,[H|X]).
+
+% Checks what courses in stream have been taken already
+% Takes remaining courses and checks if prerequisites are satisfied
+% Attempts to schedule remaining courses up to 3.
+scheduleTimetable(Stream, L) :-
   findall(S1, prop(Stream, course, S1), Z),
-  write('\n'),
-  write(Z),
-  write('\n'),
+%  hasTaken(Z,L, NotFulfilledCourses),
+%  sub(Z,L,NotFulfilledCourses),
+  notcommon(Z,L,NotFulfilledCourses),
+  fulfilledPrereqs(NotFulfilledCourses,L, X),
+  write("\nSuggested courses:\n"),
   write(X).
 
 
