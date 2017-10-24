@@ -20,12 +20,11 @@
 % ======================================================================
 
 prop("Matt", "Pass", [110, 121, 210]).
+prop(_,_, "false").
 
 
-login(User, Pass) :-
-  prop(User, Pass, X),
-  write("You have taken these courses: "),
-  write(X).
+login(User, Pass, X) :-
+  prop(User, Pass, X).
 
 
 
@@ -62,7 +61,8 @@ query(Input) :-
 % Question 4 -> requires User Login
 query(Input) :-
   Input = 4,
-  write('Login'),
+  write('I can help you schedule this terms courses depending on your interests.'),
+  write('\nLogin first'),
   write('\nUsername: '),
   nl,
   read(User),
@@ -72,21 +72,73 @@ authenticate(User) :-
   write('\nPassword: '),
   nl,
   read(Pass),
-  login(User,Pass).
+  login(User,Pass, X),
+  selectInterest(User,Pass,X).
+
+selectInterest(User,Pass,X) :-
+  X = "false",
+  write("Sorry that is an incorrect username and password combo."),
+  query(4).
+
+selectInterest(User,Pass,X) :-
+  not(X = "false"),
+  write("Hi "),
+  write(User),
+  write("."),
+  write('\nWhat do you want to focus on? Select a number'),
+  write('\n1. Software Engineering'),
+  write('\n2. Artificial Intelligence'),
+  nl,
+  read(Interest),
+  findCourse(Interest, X).
+
+listAllCourses([]).
+listAllCourses([Y|H]) :-
+  write('\n'),
+  write("CPSC "),
+  write(Y),
+  listAllCourses(H).
+
+findCourse(Interest, X) :-
+  Interest = 1,
+  write('Looking for courses related to '),
+  write('Software Engineering.'),
+  write('\nYou have currently taken '),
+  listAllCourses(X),
+  write('\nPlease wait...'),
+  scheduleTimetable(se, X).
+
+findCourse(Interest, X) :-
+  Interest = 2,
+  write('Looking for courses related to '),
+  write('Artificial Intelligence.'),
+  write('\nYou have currently taken '),
+  listAllCourses(X),
+  write('\nPlease wait...'),
+  scheduleTimetable(ai, X).
+
+scheduleTimetable(Stream, X) :-
+  findall(S1, prop(Stream, course, S1), Z),
+  write('\n'),
+  write(Z),
+  write('\n'),
+  write(X).
+
 
 
 
 % ======================================================================
 % QUESTION TYPES
 % ======================================================================
-				% List of questions
-				% which instructor teaches X course
-				% which Y course is a prereq of X course
-				% which X courses are AI courses
-				% which X courses are SE courses
-				% which X courses are taught by Y instructor
-				% which days is X course offered
-				% which building is X course in
+% List of questions
+% which instructor teaches X course
+% which Y course is a prereq of X course
+% which X courses are AI courses
+% which X courses are SE courses
+% which X courses are taught by Y instructor
+% which days is X course offered
+% which building is X course in
+
 % X is section of course
 % Y is course
 getSection(X,Y) :-
@@ -109,7 +161,7 @@ getBuilding(X, Y) :-
 % X is course wanting to take
 % Y is preReq course
 getPreReq(X, Z, Y) :-
-	findall(S1, prop(X, prereq, Y), Z). 
+	findall(S1, prop(X, prereq, Y), Z).
 
 % Q(3)
 % X is instructor name as string
@@ -139,22 +191,21 @@ dayCourseOffered(X, Y) :-
 
 				% course(number, section, name, instructor, date, time, building, room)
 
-prop(AI, course, 302).
-prop(AI, course, 304).
-prop(AI, course, 312).
-prop(AI, course, 322).
-prop(AI, course, 340).
-prop(AI, course, 422).
+prop(ai, course, 302).
+prop(ai, course, 304).
+prop(ai, course, 312).
+prop(ai, course, 322).
+prop(ai, course, 340).
+prop(ai, course, 422).
 
-prop(SE, course, 304).
-prop(SE, course, 311).
-prop(SE, course, 317).
-prop(SE, course, 319).
-prop(SE, course, 344).
-prop(SE, course, 411).
-prop(SE, course, 416).
-prop(SE, course, 444).
-%added
+prop(se, course, 304).
+prop(se, course, 311).
+prop(se, course, 317).
+prop(se, course, 319).
+prop(se, course, 344).
+prop(se, course, 411).
+prop(se, course, 416).
+prop(se, course, 444).
 
 % Core courses
 prop(110, course, 110).
