@@ -234,7 +234,7 @@ getPreReq(X, Z, Y) :-
 % X is instructor name as string
 % Y is course as a XXX
 isInstructor(X,Y) :-
-	prop(X,instructor,Y).
+	findall(I, prop(X, instructor, I), Y).
 
 % Q(6)
 % get all course times for a course
@@ -252,11 +252,23 @@ getCourseTimes(X, Z, P) :-
 dayCourseOffered(X, Y) :-
 	findall(D, prop(X, day, D), Y).
 
+% X is the course type (ex. se or ai)
+% Y is the course number that gets returned
+getCourses(X, Y) :-
+	findall(C, prop(X, course, C), Y).
+
+% X is the course number
+% Y is the instructor who teaches that course
+whoTeachesCourse(X, Y) :-
+	prop(X, instructor, Y).
+	
+
+
 % ======================================================================
 % DATABASE
 % ======================================================================
 
-				% course(number, section, name, instructor, date, time, building, room)
+% course(number, name, section, instructor, date, time, building, room, prereq)
 
 prop(ai, course, 302).
 prop(ai, course, 304).
