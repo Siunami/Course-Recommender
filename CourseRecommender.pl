@@ -58,6 +58,15 @@ query(Input) :-
   read(Class),
   isInstructor(Class).
 
+% Question 2
+query(Input) :-
+	Input = 2,
+	write('What class would you like to know the prereq of'),
+	nl,
+	read(Class),
+	getPreReq(Class).
+
+
 
 % Question 4 -> requires User Login
 query(Input) :-
