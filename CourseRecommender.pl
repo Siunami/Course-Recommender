@@ -61,11 +61,18 @@ query(Input) :-
 % Question 2
 query(Input) :-
 	Input = 2,
-	write('What class would you like to know the prereq of'),
+	write('What class would you like to know the prereqs of?'),
 	nl,
 	read(Class),
 	getPreReq(Class).
 
+% Question 3
+query(Input) :-
+	Input = 3,
+	write('What class would you like to know the instructor of?'),
+	nl,
+	read(Class),
+	whoTeachesCourse(Class).
 
 
 % Question 4 -> requires User Login
